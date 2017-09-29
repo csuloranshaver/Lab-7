@@ -1,13 +1,3 @@
-<?php
-    require_once('database.php');
-
-    // Get products for selected category
-    $query = "SELECT * FROM customers
-              ORDER BY customerID";
-    $customers = $db->query($query);
-    
-    $db->close();
-?>
 <!DOCTYPE html>
 <html>
 
@@ -27,22 +17,31 @@
 
     <div id="main">
 
-        <h1>Customer List</h1>
+        <h1>Customer Lookup</h1>
 
         <div id="content">
-            <!-- display a table of customers -->
-            <table>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                </tr>
-                <?php foreach ($customers as $customer) : ?>
-                <tr>
-                    <td><?php echo $customer['firstName']; ?></td>
-                    <td><?php echo $customer['lastName']; ?></td>
-                </tr>
-                <?php endforeach; ?>
-            </table>
+            <form action="lookup.php" method="post">
+
+            <div id="data">
+                <label>Search By:</label>
+                <select name="userType">
+                    <option value="customerID">ID</option>
+                    <option value="firstName">First Name</option>
+                    <option value="lastName">Last Name</option>
+                </select>
+                
+                <br>
+
+                <label>Using:</label>
+                <input type="text" name="userValue"/><br />
+            </div>
+
+            <div id="buttons">
+                <label>&nbsp;</label>
+                <input type="submit" value="Lookup Customer(s)" /><br />
+            </div>
+
+            </form>
         </div>
     </div>
 
